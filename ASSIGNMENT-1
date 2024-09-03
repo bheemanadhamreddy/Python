@@ -1,0 +1,115 @@
+1)def factorial(n):
+    if n == 0 or n == 1:
+        return 1
+    else:
+        return n * factorial(n - 1)
+def sum_of_factorials(N):
+    total_sum = 0
+    for i in range(1, N + 1):
+        total_sum += factorial(i) / i
+    return total_sum
+N = 5
+result = sum_of_factorials(N)
+print(f"Sum={result}")
+
+2)from bisect import bisect_right
+def maxProfitAssignment(difficulty, profit, worker):
+    jobs = sorted(zip(difficulty, profit))
+    worker.sort()
+    max_profit = 0
+    curr_max = 0
+   for i in range(len(worker)):
+        curr_max = max(curr_max, max(p for d, p in jobs if d <= worker[i]))
+        max_profit += curr_max
+
+    return max_profit
+difficulty = [2, 4, 6, 8, 10]
+profit = [10, 20, 30, 40, 50]
+worker = [4, 5, 6, 7]
+print(maxProfitAssignment(difficulty, profit, worker))  
+
+3)def sort_and_replace_negatives(arr):
+    if not arr:
+        return arr
+    average = sum(arr) / len(arr)
+    arr = [average if x < 0 else x for x in arr]
+    arr.sort()
+    return arr
+numbers = [3, -1, 4, 1, -5, 9, 2]
+sorted_numbers = sort_and_replace_negatives(numbers)
+print(sorted_numbers)
+
+4)my_list = [1, 2, 2, 3, 4, 4, 5]
+my_list = list(dict.fromkeys(my_list))
+print(my_list)
+
+5)def max_guests(T, E, L):
+    current_guests = 0
+    max_guests = 0    
+    for i in range(T):
+        current_guests += E[i] - L[i]
+        max_guests = max(max_guests, current_guests)    
+    return max_guests
+T = 5
+E = [7, 0, 5, 1, 3]
+L = [1, 2, 1, 3, 4]
+print(max_guests(T, E, L))  
+
+6)def smallerNumbersThanCurrent(nums):
+    result = []
+    for i in range(len(nums)):
+        count = 0
+        for j in range(len(nums)):
+            if nums[j] < nums[i] and j != i:
+                count += 1
+        result.append(count)
+    return result
+nums = [8, 1, 2, 2, 3]
+output = smallerNumbersThanCurrent(nums)
+print(output)
+
+7)def sumsquare(l):
+    odd_sum = sum(x**2 for x in l if x % 2 != 0)
+    even_sum = sum(x**2 for x in l if x % 2 == 0)
+    return [odd_sum, even_sum]
+n = int(input("Enter the number of elements: "))
+elements = []
+for _ in range(n):
+    elements.append(int(input("Enter the element: ")))
+print(sumsquare(elements))
+
+8)def find_peak_element(nums):
+    left, right = 0, len(nums) - 1   
+    while left < right:
+        mid = left + (right - left) // 2        
+        if nums[mid] < nums[mid + 1]:
+            left = mid + 1
+        else:
+            right = mid    
+    return left
+nums = [1, 2, 3, 1]
+print(find_peak_element(nums))
+
+9)array = [14, 16, 87, 36, 25, 89, 34]
+M = 1
+N = 3
+sorted_array = sorted(array)
+mth_max = sorted_array[-M]
+nth_min = sorted_array[N-1]
+sum_result = mth_max + nth_min
+difference_result = abs(mth_max - nth_min)
+print(f"{M}st Maximum Number = {mth_max} {N}rd Minimum Number = {nth_min} Sum = {sum_result} Difference = {difference_result}")
+
+10)def is_prime(num):
+    if num < 2:
+        return False
+    for i in range(2, int(num ** 0.5) + 1):
+        if num % i == 0:
+            return False
+    return True
+def find_non_composite_numbers(arr):
+    non_composite_nums = [num for num in arr if is_prime(num)]
+    return non_composite_nums
+array_of_elements = [26, 28, 47, 26, 43, 51, 29]
+prime_numbers_in_array_elements = find_non_composite_numbers(array_of_elements)
+print("Prime numbers in Array elements =", prime_numbers_in_array_elements)
